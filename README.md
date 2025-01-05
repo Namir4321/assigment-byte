@@ -68,3 +68,246 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Task Management API
+
+This project is a task management API built using Node.js, Express.js, MongoDB, and Mongoose. It provides endpoints for user authentication and task management, including creating, reading, updating, and deleting tasks.
+
+Features
+
+User Authentication
+
+Register a new user: Validates input fields and creates a new user.
+
+Login: Authenticates user credentials, generates JWT access tokens, and stores session data.
+
+Task Management
+
+Create a Task: Validates input fields and creates a new task in the database.
+
+Retrieve All Tasks: Fetches and returns all tasks.
+
+Retrieve a Single Task: Fetches and returns a task by its unique ID.
+
+Update Task Status: Updates the status of a task, ensuring only valid statuses (pending, in-progress, completed) are allowed.
+
+Delete a Task: Removes a task by its ID from the database.
+
+Installation and Setup
+
+Prerequisites
+
+Node.js (v14 or higher)
+
+MongoDB
+
+npm or yarn
+
+Steps to Run Locally
+
+Clone the Repository:
+
+git clone <repository-url>
+cd <project-folder>
+
+Install Dependencies:
+
+npm install
+# or
+yarn install
+
+Set Up Environment Variables:
+Create a .env file in the root directory and include the following:
+
+MONGO_URI=<your-mongodb-uri>
+SECRET_KEY=<your-secret-key>
+
+Start the Server:
+
+npm start
+# or
+yarn start
+
+Test the Endpoints:
+Use an API testing tool like Postman or Insomnia to test the endpoints.
+
+API Endpoints
+
+Authentication
+
+Register
+
+POST /api/auth/register
+
+Request Body:
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "securepassword"
+}
+
+Response:
+
+{
+  "_id": "<user-id>",
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+
+Login
+
+POST /api/auth/login
+
+Request Body:
+
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword"
+}
+
+Response:
+
+{
+  "message": "Login successful",
+  "accessToken": "<jwt-token>",
+  "user": {
+    "_id": "<user-id>",
+    "name": "John Doe",
+    "email": "john.doe@example.com"
+  }
+}
+
+Task Management
+
+Create Task
+
+POST /api/tasks
+
+Request Body:
+
+{
+  "title": "Task Title",
+  "description": "Task Description"
+}
+
+Response:
+
+{
+  "message": "Task created successfully",
+  "task": {
+    "_id": "<task-id>",
+    "title": "Task Title",
+    "description": "Task Description",
+    "status": "pending"
+  }
+}
+
+Get All Tasks
+
+GET /api/tasks
+
+Response:
+
+{
+  "message": "Tasks retrieved successfully",
+  "tasks": [
+    {
+      "_id": "<task-id>",
+      "title": "Task Title",
+      "description": "Task Description",
+      "status": "pending"
+    }
+  ]
+}
+
+Get Single Task
+
+GET /api/tasks/:id
+
+Response:
+
+{
+  "message": "Task retrieved successfully",
+  "task": {
+    "_id": "<task-id>",
+    "title": "Task Title",
+    "description": "Task Description",
+    "status": "pending"
+  }
+}
+
+Update Task Status
+
+PUT /api/tasks/:id
+
+Request Body:
+
+{
+  "status": "in-progress"
+}
+
+Response:
+
+{
+  "message": "Task status updated successfully",
+  "task": {
+    "_id": "<task-id>",
+    "status": "in-progress"
+  }
+}
+
+Delete Task
+
+DELETE /api/tasks/:id
+
+Response:
+
+{
+  "message": "Task deleted successfully",
+  "task": {
+    "_id": "<task-id>",
+    "title": "Task Title",
+    "description": "Task Description"
+  }
+}
+
+Error Handling
+
+Code
+
+Description
+
+400
+
+Bad Request (e.g., Missing fields, Validation errors)
+
+401
+
+Unauthorized (e.g., Invalid credentials)
+
+404
+
+Not Found (e.g., Task not found)
+
+500
+
+Internal Server Error
+
+Dependencies
+
+bcryptjs: Hash passwords securely.
+
+jsonwebtoken: Generate and verify JWT tokens.
+
+express: Web framework.
+
+mongoose: MongoDB object modeling.
+
+Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request for any features or bug fixes.
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
